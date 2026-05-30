@@ -36,6 +36,11 @@ class Statistique
         return $this->count('SELECT COUNT(*) FROM emprunts WHERE est_retourne = 0');
     }
 
+    public function empruntsRetournes()
+    {
+        return $this->count('SELECT COUNT(*) FROM emprunts WHERE est_retourne = 1');
+    }
+
     public function nombreRetards()
     {
         return $this->count('SELECT COUNT(*) FROM emprunts WHERE est_retourne = 0 AND date_retour_prevue < ' . currentDateSql());

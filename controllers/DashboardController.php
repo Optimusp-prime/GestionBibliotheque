@@ -19,8 +19,11 @@ class DashboardController
         $totalEtudiants = $this->statistiqueModel->totalEtudiants();
         $totalEmprunts = $this->statistiqueModel->totalEmprunts();
         $empruntsEnCours = $this->statistiqueModel->empruntsEnCours();
+        $empruntsRetournes = $this->statistiqueModel->empruntsRetournes();
         $retards = $this->statistiqueModel->nombreRetards();
         $derniersEmprunts = $this->statistiqueModel->derniersEmprunts();
+        $livresParCategorie = $this->statistiqueModel->livresParCategorie();
+        $livresPlusEmpruntes = $this->statistiqueModel->livresPlusEmpruntes();
 
         $pageTitle = 'Tableau de bord';
         $pageHeading = 'Tableau de bord';

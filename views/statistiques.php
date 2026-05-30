@@ -1,3 +1,23 @@
+<?php
+$categorieLabels = array_map(function ($row) {
+    return $row['nom'];
+}, $livresParCategorie);
+$categorieValues = array_map(function ($row) {
+    return (int) $row['total'];
+}, $livresParCategorie);
+$topLivreLabels = array_map(function ($row) {
+    return $row['titre'];
+}, $livresPlusEmpruntes);
+$topLivreValues = array_map(function ($row) {
+    return (int) $row['total'];
+}, $livresPlusEmpruntes);
+$topEtudiantLabels = array_map(function ($row) {
+    return $row['prenom'] . ' ' . $row['nom'];
+}, $etudiantsPlusActifs);
+$topEtudiantValues = array_map(function ($row) {
+    return (int) $row['total'];
+}, $etudiantsPlusActifs);
+?>
 <?php require __DIR__ . '/layout/header.php'; ?>
 
 <div class="row g-3 mb-4">
@@ -9,6 +29,65 @@
         <div class="stat-value"><?= h($totalEmprunts) ?></div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-6">
+    <div class="content-card h-100">
+      <div class="card-head">
+        <h5><i class="bi bi-pie-chart me-2"></i>Répartition par catégorie</h5>
+      </div>
+      <div class="card-body-custom">
+        <?php if (array_sum($categorieValues) === 0): ?>
+          <div class="empty-state">
+            <i class="bi bi-pie-chart"></i>
+            <p>Aucune donnée de catégorie pour le moment.</p>
+          </div>
+        <?php else: ?>
+          <div class="chart-box">
+            <canvas class="js-chart" data-type="doughnut" data-label="Livres" data-labels="<?= h(json_encode($categorieLabels, JSON_UNESCAPED_UNICODE)) ?>" data-values="<?= h(json_encode($categorieValues)) ?>"></canvas>
+          </div>
+        <?php endif; ?>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="content-card h-100">
+      <div class="card-head">
+        <h5><i class="bi bi-bar-chart me-2"></i>Livres les plus empruntés</h5>
+      </div>
+      <div class="card-body-custom">
+        <?php if (array_sum($topLivreValues) === 0): ?>
+          <div class="empty-state">
+            <i class="bi bi-bar-chart"></i>
+            <p>Aucun emprunt de livre pour le moment.</p>
+          </div>
+        <?php else: ?>
+          <div class="chart-box">
+            <canvas class="js-chart" data-type="bar" data-label="Emprunts" data-labels="<?= h(json_encode($topLivreLabels, JSON_UNESCAPED_UNICODE)) ?>" data-values="<?= h(json_encode($topLivreValues)) ?>"></canvas>
+          </div>
+        <?php endif; ?>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-card">
+  <div class="card-head">
+    <h5><i class="bi bi-mortarboard me-2"></i>Étudiants les plus actifs</h5>
+  </div>
+  <div class="card-body-custom">
+    <?php if (array_sum($topEtudiantValues) === 0): ?>
+      <div class="empty-state">
+        <i class="bi bi-mortarboard"></i>
+        <p>Aucun emprunt étudiant pour le moment.</p>
+      </div>
+    <?php else: ?>
+      <div class="chart-box chart-box-wide">
+        <canvas class="js-chart" data-type="bar" data-label="Emprunts" data-labels="<?= h(json_encode($topEtudiantLabels, JSON_UNESCAPED_UNICODE)) ?>" data-values="<?= h(json_encode($topEtudiantValues)) ?>"></canvas>
+      </div>
+    <?php endif; ?>
   </div>
 </div>
 

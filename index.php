@@ -30,8 +30,10 @@ switch ($page) {
             $categorieController->create();
         } elseif ($action === 'edit' && $id > 0) {
             $categorieController->edit($id);
-        } elseif ($action === 'delete' && $id > 0) {
+        } elseif ($action === 'delete' && $id > 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $categorieController->delete($id);
+        } elseif ($action === 'delete') {
+            redirectWithMessage($baseUrl . '/index.php?page=categories', 'error', 'Action non autorisée.');
         } else {
             $categorieController->index();
         }
@@ -42,8 +44,10 @@ switch ($page) {
             $livreController->create();
         } elseif ($action === 'edit' && $id > 0) {
             $livreController->edit($id);
-        } elseif ($action === 'delete' && $id > 0) {
+        } elseif ($action === 'delete' && $id > 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $livreController->delete($id);
+        } elseif ($action === 'delete') {
+            redirectWithMessage($baseUrl . '/index.php?page=livres', 'error', 'Action non autorisée.');
         } else {
             $livreController->index();
         }
@@ -54,8 +58,10 @@ switch ($page) {
             $etudiantController->create();
         } elseif ($action === 'edit' && $id > 0) {
             $etudiantController->edit($id);
-        } elseif ($action === 'delete' && $id > 0) {
+        } elseif ($action === 'delete' && $id > 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $etudiantController->delete($id);
+        } elseif ($action === 'delete') {
+            redirectWithMessage($baseUrl . '/index.php?page=etudiants', 'error', 'Action non autorisée.');
         } else {
             $etudiantController->index();
         }

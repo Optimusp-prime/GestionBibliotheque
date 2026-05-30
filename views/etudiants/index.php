@@ -70,7 +70,7 @@
                 <td class="table-actions" data-label="Actions">
                   <span class="action-group">
                     <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=etudiants&action=edit&id=<?= h($etudiant['id']) ?>"><i class="bi bi-pencil-square"></i></a>
-                    <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=etudiants&action=delete&id=<?= h($etudiant['id']) ?>" onclick="return confirm('Supprimer cet étudiant ?')"><i class="bi bi-trash"></i></a>
+                    <button type="button" class="btn-icon delete" data-delete-url="<?= h($baseUrl) ?>/index.php?page=etudiants&action=delete&id=<?= h($etudiant['id']) ?>" data-delete-title="Supprimer un étudiant" data-delete-message="Voulez-vous vraiment supprimer cet étudiant ?" data-delete-note="Un étudiant lié à un emprunt ne peut pas être supprimé."><i class="bi bi-trash"></i></button>
                   </span>
                 </td>
               </tr>
