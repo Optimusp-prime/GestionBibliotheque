@@ -11,7 +11,7 @@ class Categorie
 
     public function getAll()
     {
-        $stmt = $this->conn->prepare('SELECT id, nom FROM categories ORDER BY nom');
+        $stmt = $this->conn->prepare('SELECT id, nom FROM categories ORDER BY id DESC');
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -23,7 +23,7 @@ class Categorie
             FROM categories c
             LEFT JOIN livres l ON l.categorie_id = c.id
             GROUP BY c.id, c.nom
-            ORDER BY c.nom
+            ORDER BY c.id DESC
         ");
         $stmt->execute();
         return $stmt->fetchAll();

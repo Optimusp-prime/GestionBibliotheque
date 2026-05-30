@@ -24,7 +24,7 @@ class Livre
             $params = [$like, $like, $like];
         }
 
-        $sql .= ' ORDER BY l.titre';
+        $sql .= ' ORDER BY l.id DESC';
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll();
@@ -32,7 +32,7 @@ class Livre
 
     public function getAvailableForSelect()
     {
-        $stmt = $this->conn->prepare('SELECT id, titre, quantite_disponible FROM livres ORDER BY titre');
+        $stmt = $this->conn->prepare('SELECT id, titre, quantite_disponible FROM livres ORDER BY id DESC');
         $stmt->execute();
         return $stmt->fetchAll();
     }

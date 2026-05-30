@@ -62,7 +62,7 @@ class Statistique
             INNER JOIN livres l ON l.id = e.livre_id
             INNER JOIN etudiants et ON et.id = e.etudiant_id
             WHERE e.est_retourne = 0 AND e.date_retour_prevue < " . currentDateSql() . "
-            ORDER BY e.date_retour_prevue ASC
+            ORDER BY e.id DESC
         ");
         $stmt->execute();
         return $stmt->fetchAll();
@@ -71,11 +71,11 @@ class Statistique
     public function livresParCategorie()
     {
         $stmt = $this->conn->prepare("
-            SELECT c.nom, COUNT(l.id) AS total
+            SELECT c.id, c.nom, COUNT(l.id) AS total
             FROM categories c
             LEFT JOIN livres l ON l.categorie_id = c.id
-            GROUP BY c.nom
-            ORDER BY c.nom
+            GROUP BY c.id, c.nom
+            ORDER BY c.id DESC
         ");
         $stmt->execute();
         return $stmt->fetchAll();

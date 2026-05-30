@@ -57,28 +57,30 @@
         </div>
       </div>
       <div class="card-body-custom p-0">
-        <table class="custom-table">
+        <table class="custom-table table-wide">
           <thead>
             <tr>
-              <th>Livre</th>
-              <th>Etudiant</th>
-              <th>Emprunt</th>
-              <th>Retour prevu</th>
-              <th>Statut</th>
-              <th>Action</th>
+              <th class="cell-long">Livre</th>
+              <th class="cell-medium">Etudiant</th>
+              <th class="cell-medium">Emprunt</th>
+              <th class="cell-medium">Retour prevu</th>
+              <th class="cell-medium">Statut</th>
+              <th class="table-actions">Action</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($emprunts as $emprunt): ?>
               <tr>
-                <td><?= h($emprunt['titre']) ?></td>
-                <td><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
-                <td><?= h($emprunt['date_emprunt']) ?></td>
-                <td><?= h($emprunt['date_retour_prevue']) ?></td>
-                <td><span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourne' : 'En cours' ?></span></td>
-                <td>
+                <td class="cell-long"><?= h($emprunt['titre']) ?></td>
+                <td class="cell-medium"><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
+                <td class="cell-medium"><?= h($emprunt['date_emprunt']) ?></td>
+                <td class="cell-medium"><?= h($emprunt['date_retour_prevue']) ?></td>
+                <td class="cell-medium"><span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourne' : 'En cours' ?></span></td>
+                <td class="table-actions">
                   <?php if (!$emprunt['est_retourne']): ?>
-                    <a class="btn-icon return" href="<?= h($baseUrl) ?>/index.php?page=emprunts&action=retour&id=<?= h($emprunt['id']) ?>" title="Marquer comme retourne"><i class="bi bi-check2-circle"></i></a>
+                    <span class="action-group">
+                      <a class="btn-icon return" href="<?= h($baseUrl) ?>/index.php?page=emprunts&action=retour&id=<?= h($emprunt['id']) ?>" title="Marquer comme retourne"><i class="bi bi-check2-circle"></i></a>
+                    </span>
                   <?php else: ?>
                     -
                   <?php endif; ?>

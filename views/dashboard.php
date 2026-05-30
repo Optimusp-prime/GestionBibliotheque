@@ -63,24 +63,24 @@
         <p>Aucun emprunt enregistre pour le moment.</p>
       </div>
     <?php else: ?>
-      <table class="custom-table">
+      <table class="custom-table table-wide">
         <thead>
           <tr>
-            <th>Livre</th>
-            <th>Etudiant</th>
-            <th>Date emprunt</th>
-            <th>Retour prevu</th>
-            <th>Statut</th>
+            <th class="cell-long">Livre</th>
+            <th class="cell-medium">Etudiant</th>
+            <th class="cell-medium">Date emprunt</th>
+            <th class="cell-medium">Retour prevu</th>
+            <th class="cell-medium">Statut</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($derniersEmprunts as $emprunt): ?>
             <tr>
-              <td><?= h($emprunt['titre']) ?></td>
-              <td><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
-              <td><?= h($emprunt['date_emprunt']) ?></td>
-              <td><?= h($emprunt['date_retour_prevue']) ?></td>
-              <td><span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourne' : 'En cours' ?></span></td>
+              <td class="cell-long"><?= h($emprunt['titre']) ?></td>
+              <td class="cell-medium"><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
+              <td class="cell-medium"><?= h($emprunt['date_emprunt']) ?></td>
+              <td class="cell-medium"><?= h($emprunt['date_retour_prevue']) ?></td>
+              <td class="cell-medium"><span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourne' : 'En cours' ?></span></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

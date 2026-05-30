@@ -30,24 +30,26 @@
         <h5><i class="bi bi-list-ul me-2"></i>Liste des categories</h5>
       </div>
       <div class="card-body-custom p-0">
-        <table class="custom-table">
+        <table class="custom-table table-wide">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Nom</th>
-              <th>Livres</th>
-              <th>Actions</th>
+              <th class="cell-small">#</th>
+              <th class="cell-long">Nom</th>
+              <th class="cell-small">Livres</th>
+              <th class="table-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($categories as $categorie): ?>
               <tr>
-                <td><?= h($categorie['id']) ?></td>
-                <td><?= h($categorie['nom']) ?></td>
-                <td><?= h($categorie['nombre_livres']) ?></td>
-                <td>
-                  <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=categories&action=edit&id=<?= h($categorie['id']) ?>"><i class="bi bi-pencil-square"></i></a>
-                  <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=categories&action=delete&id=<?= h($categorie['id']) ?>" onclick="return confirm('Supprimer cette categorie ?')"><i class="bi bi-trash"></i></a>
+                <td class="cell-small"><?= h($categorie['id']) ?></td>
+                <td class="cell-long"><?= h($categorie['nom']) ?></td>
+                <td class="cell-small"><?= h($categorie['nombre_livres']) ?></td>
+                <td class="table-actions">
+                  <span class="action-group">
+                    <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=categories&action=edit&id=<?= h($categorie['id']) ?>"><i class="bi bi-pencil-square"></i></a>
+                    <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=categories&action=delete&id=<?= h($categorie['id']) ?>" onclick="return confirm('Supprimer cette categorie ?')"><i class="bi bi-trash"></i></a>
+                  </span>
                 </td>
               </tr>
             <?php endforeach; ?>

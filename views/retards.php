@@ -11,24 +11,24 @@
         <p>Aucun retard pour le moment.</p>
       </div>
     <?php else: ?>
-      <table class="custom-table">
+      <table class="custom-table table-wide">
         <thead>
           <tr>
-            <th>Etudiant</th>
-            <th>Numero</th>
-            <th>Livre</th>
-            <th>Date emprunt</th>
-            <th>Retour prevu</th>
+            <th class="cell-medium">Etudiant</th>
+            <th class="cell-medium">Numero</th>
+            <th class="cell-long">Livre</th>
+            <th class="cell-medium">Date emprunt</th>
+            <th class="cell-medium">Retour prevu</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($retards as $retard): ?>
             <tr>
-              <td><?= h($retard['prenom'] . ' ' . $retard['nom']) ?></td>
-              <td><?= h($retard['numero_etudiant']) ?></td>
-              <td><?= h($retard['titre']) ?></td>
-              <td><?= h($retard['date_emprunt']) ?></td>
-              <td><?= h($retard['date_retour_prevue']) ?></td>
+              <td class="cell-medium"><?= h($retard['prenom'] . ' ' . $retard['nom']) ?></td>
+              <td class="cell-medium"><?= h($retard['numero_etudiant']) ?></td>
+              <td class="cell-long"><?= h($retard['titre']) ?></td>
+              <td class="cell-medium"><?= h($retard['date_emprunt']) ?></td>
+              <td class="cell-medium"><?= h($retard['date_retour_prevue']) ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

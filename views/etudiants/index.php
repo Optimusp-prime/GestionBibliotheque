@@ -48,28 +48,30 @@
         <h5><i class="bi bi-people me-2"></i>Liste des etudiants</h5>
       </div>
       <div class="card-body-custom p-0">
-        <table class="custom-table">
+        <table class="custom-table table-wide">
           <thead>
             <tr>
-              <th>Nom</th>
-              <th>Prenom</th>
-              <th>Numero</th>
-              <th>Filiere</th>
-              <th>Contact</th>
-              <th>Actions</th>
+              <th class="cell-medium">Nom</th>
+              <th class="cell-medium">Prenom</th>
+              <th class="cell-medium">Numero</th>
+              <th class="cell-medium">Filiere</th>
+              <th class="cell-long">Contact</th>
+              <th class="table-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($etudiants as $etudiant): ?>
               <tr>
-                <td><?= h($etudiant['nom']) ?></td>
-                <td><?= h($etudiant['prenom']) ?></td>
-                <td><?= h($etudiant['numero_etudiant']) ?></td>
-                <td><span class="badge-filiere"><?= h($etudiant['filiere']) ?></span></td>
-                <td><?= h($etudiant['contact']) ?></td>
-                <td>
-                  <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=etudiants&action=edit&id=<?= h($etudiant['id']) ?>"><i class="bi bi-pencil-square"></i></a>
-                  <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=etudiants&action=delete&id=<?= h($etudiant['id']) ?>" onclick="return confirm('Supprimer cet etudiant ?')"><i class="bi bi-trash"></i></a>
+                <td class="cell-medium"><?= h($etudiant['nom']) ?></td>
+                <td class="cell-medium"><?= h($etudiant['prenom']) ?></td>
+                <td class="cell-medium"><?= h($etudiant['numero_etudiant']) ?></td>
+                <td class="cell-medium"><span class="badge-filiere"><?= h($etudiant['filiere']) ?></span></td>
+                <td class="cell-long"><?= h($etudiant['contact']) ?></td>
+                <td class="table-actions">
+                  <span class="action-group">
+                    <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=etudiants&action=edit&id=<?= h($etudiant['id']) ?>"><i class="bi bi-pencil-square"></i></a>
+                    <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=etudiants&action=delete&id=<?= h($etudiant['id']) ?>" onclick="return confirm('Supprimer cet etudiant ?')"><i class="bi bi-trash"></i></a>
+                  </span>
                 </td>
               </tr>
             <?php endforeach; ?>

@@ -9,7 +9,7 @@ $items = [
     'statistiques' => ['Statistiques', 'bi-bar-chart', 'statistiques'],
 ];
 ?>
-<div class="sidebar">
+<div class="sidebar collapse d-md-block" id="sidebarNav">
   <div class="sidebar-section-title">Navigation</div>
   <?php foreach ($items as $key => $item): ?>
     <a href="<?= h($baseUrl) ?>/index.php?page=<?= h($item[2]) ?>" class="<?= $activePage === $key ? 'active' : '' ?>">

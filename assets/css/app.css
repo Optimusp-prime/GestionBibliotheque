@@ -12,6 +12,7 @@ body {
   background-color: var(--bg-page);
   font-family: "Segoe UI", sans-serif;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .topbar {
@@ -20,6 +21,7 @@ body {
   color: white;
   display: flex;
   align-items: center;
+  gap: 0.75rem;
   padding: 0 1.5rem;
   position: fixed;
   top: 0;
@@ -34,6 +36,37 @@ body {
   letter-spacing: 0.5px;
   color: white;
   text-decoration: none;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+.topbar-menu-btn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(232, 175, 48, 0.45);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex: 0 0 42px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: background 0.15s, border-color 0.15s, transform 0.12s;
+}
+.topbar-menu-btn:hover,
+.topbar-menu-btn:focus {
+  background: rgba(232, 175, 48, 0.18);
+  border-color: rgba(232, 175, 48, 0.75);
+  color: white;
+  outline: none;
+}
+.topbar-menu-btn:active {
+  transform: translateY(1px);
+}
+.topbar-menu-btn i {
+  font-size: 1.45rem;
+  line-height: 1;
 }
 .topbar .brand span {
   color: var(--accent);
@@ -47,6 +80,7 @@ body {
 .topbar-right .user-name {
   font-size: 0.9rem;
   opacity: 0.85;
+  white-space: nowrap;
 }
 .topbar-right .avatar {
   width: 36px;
@@ -59,6 +93,7 @@ body {
   font-weight: 700;
   font-size: 0.85rem;
   color: var(--primary);
+  flex: 0 0 36px;
 }
 
 .sidebar {
@@ -181,6 +216,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 .content-card .card-head h5 {
   margin: 0;
@@ -194,8 +230,13 @@ body {
 
 .custom-table {
   width: 100%;
+  min-width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
+  table-layout: auto;
+}
+.custom-table.table-wide {
+  min-width: 760px;
 }
 .custom-table thead th {
   background: var(--primary);
@@ -206,6 +247,8 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border: none;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 .custom-table tbody tr {
   border-bottom: 1px solid #f0f2f7;
@@ -217,14 +260,55 @@ body {
   padding: 0.75rem 1rem;
   color: #444;
   vertical-align: middle;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+.content-card > .card-body-custom.p-0 {
+  overflow-x: auto;
+}
+.custom-table .cell-long {
+  min-width: 180px;
+  max-width: 320px;
+}
+.custom-table .cell-medium {
+  min-width: 130px;
+}
+.custom-table .cell-small {
+  width: 80px;
+  min-width: 80px;
+  text-align: center;
+}
+.custom-table .table-actions {
+  width: 104px;
+  min-width: 104px;
+  text-align: center;
+  white-space: nowrap;
 }
 .badge-filiere {
   background: #e8f0fb;
   color: #2450a0;
   font-size: 0.72rem;
-  padding: 3px 10px;
+  padding: 4px 11px;
   border-radius: 20px;
   font-weight: 600;
+  display: inline-block;
+  min-width: 64px;
+  max-width: 240px;
+  line-height: 1.25;
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  vertical-align: middle;
+}
+.action-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 72px;
 }
 
 .form-section-title {
@@ -298,6 +382,7 @@ body {
   cursor: pointer;
   border: none;
   text-decoration: none;
+  flex: 0 0 auto;
 }
 .btn-icon.edit { background: #fff4e0; color: #b8860b; }
 .btn-icon.edit:hover { background: #ffe9b3; }
@@ -339,13 +424,43 @@ body {
 }
 
 @media (max-width: 800px) {
+  .topbar {
+    position: sticky;
+    min-height: var(--topbar-height);
+    height: auto;
+    padding: 0.7rem 1rem;
+    gap: 0.7rem;
+  }
+  .topbar .brand {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 1.02rem;
+    letter-spacing: 0.2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .topbar-right .user-name {
+    display: none;
+  }
+  .topbar-right {
+    margin-left: 0;
+    gap: 0.5rem;
+  }
+  .topbar-right .avatar {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+    font-size: 0.78rem;
+  }
   .sidebar {
     width: 100%;
     position: static;
     padding: 0.75rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 18px rgba(18, 40, 90, 0.12);
   }
-  .topbar {
-    position: static;
+  .sidebar a {
+    padding: 0.72rem 1rem;
   }
   .main-content {
     margin: 0;
@@ -355,5 +470,54 @@ body {
   .page-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+  .stat-card {
+    padding: 1rem;
+  }
+  .custom-table {
+    font-size: 0.82rem;
+  }
+  .custom-table.table-wide {
+    min-width: 680px;
+  }
+  .card-body-custom .d-flex {
+    flex-wrap: wrap;
+  }
+  .card-body-custom .d-flex .form-control {
+    min-width: 220px;
+  }
+}
+
+@media (max-width: 576px) {
+  .topbar {
+    padding: 0.65rem 0.75rem;
+  }
+  .topbar-menu-btn {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    border-radius: 9px;
+  }
+  .topbar .brand {
+    font-size: 0.98rem;
+  }
+  .main-content {
+    padding: 0.75rem;
+  }
+  .content-card .card-body-custom {
+    padding: 1rem;
+  }
+  .btn-primary-custom,
+  .btn-secondary-custom {
+    justify-content: center;
+  }
+  .custom-table {
+    min-width: 100%;
+  }
+  .custom-table.table-wide {
+    min-width: 620px;
+  }
+  .badge-filiere {
+    max-width: 190px;
   }
 }

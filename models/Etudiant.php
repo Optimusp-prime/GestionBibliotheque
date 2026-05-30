@@ -11,7 +11,7 @@ class Etudiant
 
     public function getAll()
     {
-        $stmt = $this->conn->prepare('SELECT * FROM etudiants ORDER BY nom, prenom');
+        $stmt = $this->conn->prepare('SELECT * FROM etudiants ORDER BY id DESC');
         $stmt->execute();
         return $stmt->fetchAll();
     }

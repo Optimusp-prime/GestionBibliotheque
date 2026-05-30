@@ -22,15 +22,15 @@
         <table class="custom-table">
           <thead>
             <tr>
-              <th>Categorie</th>
-              <th>Nombre de livres</th>
+              <th class="cell-long">Categorie</th>
+              <th class="cell-medium">Nombre de livres</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($livresParCategorie as $row): ?>
               <tr>
-                <td><?= h($row['nom']) ?></td>
-                <td><?= h($row['total']) ?></td>
+                <td class="cell-long"><?= h($row['nom']) ?></td>
+                <td class="cell-medium"><?= h($row['total']) ?></td>
               </tr>
             <?php endforeach; ?>
           </tbody>
@@ -48,15 +48,15 @@
         <table class="custom-table">
           <thead>
             <tr>
-              <th>Livre</th>
-              <th>Emprunts</th>
+              <th class="cell-long">Livre</th>
+              <th class="cell-medium">Emprunts</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($livresPlusEmpruntes as $row): ?>
               <tr>
-                <td><?= h($row['titre']) ?></td>
-                <td><?= h($row['total']) ?></td>
+                <td class="cell-long"><?= h($row['titre']) ?></td>
+                <td class="cell-medium"><?= h($row['total']) ?></td>
               </tr>
             <?php endforeach; ?>
           </tbody>
@@ -74,17 +74,17 @@
     <table class="custom-table">
       <thead>
         <tr>
-          <th>Etudiant</th>
-          <th>Numero</th>
-          <th>Emprunts</th>
+          <th class="cell-medium">Etudiant</th>
+          <th class="cell-medium">Numero</th>
+          <th class="cell-medium">Emprunts</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach ($etudiantsPlusActifs as $row): ?>
           <tr>
-            <td><?= h($row['prenom'] . ' ' . $row['nom']) ?></td>
-            <td><?= h($row['numero_etudiant']) ?></td>
-            <td><?= h($row['total']) ?></td>
+            <td class="cell-medium"><?= h($row['prenom'] . ' ' . $row['nom']) ?></td>
+            <td class="cell-medium"><?= h($row['numero_etudiant']) ?></td>
+            <td class="cell-medium"><?= h($row['total']) ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>

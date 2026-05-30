@@ -16,6 +16,9 @@ $baseUrl = $baseUrl ?? '/gbibliotheque';
   </head>
   <body>
     <div class="topbar">
+      <button class="topbar-menu-btn d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <i class="bi bi-list"></i>
+      </button>
       <a href="<?= h($baseUrl) ?>/index.php" class="brand">Gestion <span>Bibliotheque</span></a>
       <div class="topbar-right">
         <span class="user-name">Bibliotheque universitaire</span>

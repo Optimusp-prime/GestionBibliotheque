@@ -62,28 +62,30 @@
         </form>
       </div>
       <div class="card-body-custom p-0">
-        <table class="custom-table">
+        <table class="custom-table table-wide">
           <thead>
             <tr>
-              <th>Titre</th>
-              <th>Auteur</th>
-              <th>Categorie</th>
-              <th>Annee</th>
-              <th>Qte</th>
-              <th>Actions</th>
+              <th class="cell-long">Titre</th>
+              <th class="cell-medium">Auteur</th>
+              <th class="cell-medium">Categorie</th>
+              <th class="cell-small">Annee</th>
+              <th class="cell-small">Qte</th>
+              <th class="table-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($livres as $livre): ?>
               <tr>
-                <td><?= h($livre['titre']) ?></td>
-                <td><?= h($livre['auteur']) ?></td>
-                <td><span class="badge-filiere"><?= h($livre['categorie']) ?></span></td>
-                <td><?= h($livre['annee']) ?></td>
-                <td><?= h($livre['quantite_disponible']) ?></td>
-                <td>
-                  <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=livres&action=edit&id=<?= h($livre['id']) ?>"><i class="bi bi-pencil-square"></i></a>
-                  <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=livres&action=delete&id=<?= h($livre['id']) ?>" onclick="return confirm('Supprimer ce livre ?')"><i class="bi bi-trash"></i></a>
+                <td class="cell-long"><?= h($livre['titre']) ?></td>
+                <td class="cell-medium"><?= h($livre['auteur']) ?></td>
+                <td class="cell-medium"><span class="badge-filiere"><?= h($livre['categorie']) ?></span></td>
+                <td class="cell-small"><?= h($livre['annee']) ?></td>
+                <td class="cell-small"><?= h($livre['quantite_disponible']) ?></td>
+                <td class="table-actions">
+                  <span class="action-group">
+                    <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=livres&action=edit&id=<?= h($livre['id']) ?>"><i class="bi bi-pencil-square"></i></a>
+                    <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=livres&action=delete&id=<?= h($livre['id']) ?>" onclick="return confirm('Supprimer ce livre ?')"><i class="bi bi-trash"></i></a>
+                  </span>
                 </td>
               </tr>
             <?php endforeach; ?>
