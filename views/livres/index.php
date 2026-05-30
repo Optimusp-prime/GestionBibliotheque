@@ -18,9 +18,9 @@
             <input type="text" name="auteur" class="form-control" value="<?= h($editLivre['auteur'] ?? '') ?>" required>
           </div>
           <div class="mb-3">
-            <label class="form-label">Categorie <span class="text-danger">*</span></label>
+            <label class="form-label">Catégorie <span class="text-danger">*</span></label>
             <select name="categorie_id" class="form-select" required>
-              <option value="">-- Choisir une categorie --</option>
+              <option value="">-- Choisir une catégorie --</option>
               <?php foreach ($categories as $categorie): ?>
                 <option value="<?= h($categorie['id']) ?>" <?= (int)($editLivre['categorie_id'] ?? 0) === (int)$categorie['id'] ? 'selected' : '' ?>>
                   <?= h($categorie['nom']) ?>
@@ -30,11 +30,11 @@
           </div>
           <div class="row g-3 mb-3">
             <div class="col-md-6">
-              <label class="form-label">Annee <span class="text-danger">*</span></label>
+              <label class="form-label">Année <span class="text-danger">*</span></label>
               <input type="number" name="annee" class="form-control" value="<?= h($editLivre['annee'] ?? '') ?>" required>
             </div>
             <div class="col-md-6">
-              <label class="form-label">Quantite disponible <span class="text-danger">*</span></label>
+              <label class="form-label">Quantité disponible <span class="text-danger">*</span></label>
               <input type="number" name="quantite_disponible" min="0" class="form-control" value="<?= h($editLivre['quantite_disponible'] ?? '0') ?>" required>
             </div>
           </div>
@@ -57,7 +57,7 @@
       <div class="card-body-custom">
         <form method="GET" action="<?= h($baseUrl) ?>/index.php" class="d-flex gap-2 mb-3">
           <input type="hidden" name="page" value="livres">
-          <input type="text" name="q" class="form-control" placeholder="Rechercher par titre, auteur ou categorie" value="<?= h($search) ?>">
+          <input type="text" name="q" class="form-control" placeholder="Rechercher par titre, auteur ou catégorie" value="<?= h($search) ?>">
           <button class="btn-primary-custom" type="submit"><i class="bi bi-search"></i> Rechercher</button>
         </form>
       </div>
@@ -67,9 +67,9 @@
             <tr>
               <th class="cell-long">Titre</th>
               <th class="cell-medium">Auteur</th>
-              <th class="cell-medium">Categorie</th>
-              <th class="cell-small">Annee</th>
-              <th class="cell-small">Qte</th>
+              <th class="cell-medium">Catégorie</th>
+              <th class="cell-small">Année</th>
+              <th class="cell-small">Qté</th>
               <th class="table-actions">Actions</th>
             </tr>
           </thead>
@@ -78,9 +78,9 @@
               <tr>
                 <td class="cell-long" data-label="Titre"><?= h($livre['titre']) ?></td>
                 <td class="cell-medium" data-label="Auteur"><?= h($livre['auteur']) ?></td>
-                <td class="cell-medium" data-label="Categorie"><span class="badge-filiere"><?= h($livre['categorie']) ?></span></td>
-                <td class="cell-small" data-label="Annee"><?= h($livre['annee']) ?></td>
-                <td class="cell-small" data-label="Qte"><?= h($livre['quantite_disponible']) ?></td>
+                <td class="cell-medium" data-label="Catégorie"><span class="badge-filiere"><?= h($livre['categorie']) ?></span></td>
+                <td class="cell-small" data-label="Année"><?= h($livre['annee']) ?></td>
+                <td class="cell-small" data-label="Qté"><?= h($livre['quantite_disponible']) ?></td>
                 <td class="table-actions" data-label="Actions">
                   <span class="action-group">
                     <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=livres&action=edit&id=<?= h($livre['id']) ?>"><i class="bi bi-pencil-square"></i></a>

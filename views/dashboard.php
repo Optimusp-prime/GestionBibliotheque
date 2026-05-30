@@ -14,7 +14,7 @@
     <div class="stat-card gold">
       <div class="stat-icon gold"><i class="bi bi-mortarboard"></i></div>
       <div>
-        <div class="stat-label">Total etudiants</div>
+        <div class="stat-label">Total étudiants</div>
         <div class="stat-value"><?= h($totalEtudiants) ?></div>
       </div>
     </div>
@@ -60,16 +60,16 @@
     <?php if (count($derniersEmprunts) === 0): ?>
       <div class="empty-state">
         <i class="bi bi-inbox"></i>
-        <p>Aucun emprunt enregistre pour le moment.</p>
+        <p>Aucun emprunt enregistré pour le moment.</p>
       </div>
     <?php else: ?>
       <table class="custom-table table-wide">
         <thead>
           <tr>
             <th class="cell-long">Livre</th>
-            <th class="cell-medium">Etudiant</th>
-            <th class="cell-medium">Date emprunt</th>
-            <th class="cell-medium">Retour prevu</th>
+            <th class="cell-medium">Étudiant</th>
+            <th class="cell-medium">Date d'emprunt</th>
+            <th class="cell-medium">Retour prévu</th>
             <th class="cell-medium">Statut</th>
           </tr>
         </thead>
@@ -77,10 +77,10 @@
           <?php foreach ($derniersEmprunts as $emprunt): ?>
             <tr>
               <td class="cell-long" data-label="Livre"><?= h($emprunt['titre']) ?></td>
-              <td class="cell-medium" data-label="Etudiant"><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
-              <td class="cell-medium" data-label="Date emprunt"><?= h($emprunt['date_emprunt']) ?></td>
-              <td class="cell-medium" data-label="Retour prevu"><?= h($emprunt['date_retour_prevue']) ?></td>
-              <td class="cell-medium" data-label="Statut"><span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourne' : 'En cours' ?></span></td>
+              <td class="cell-medium" data-label="Étudiant"><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
+              <td class="cell-medium" data-label="Date d'emprunt"><?= h($emprunt['date_emprunt']) ?></td>
+              <td class="cell-medium" data-label="Retour prévu"><?= h($emprunt['date_retour_prevue']) ?></td>
+              <td class="cell-medium" data-label="Statut"><span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourné' : 'En cours' ?></span></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

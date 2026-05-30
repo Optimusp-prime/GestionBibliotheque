@@ -16,8 +16,8 @@ class EtudiantController
     public function index($editEtudiant = null)
     {
         $etudiants = $this->etudiantModel->getAll();
-        $pageTitle = 'Etudiants';
-        $pageHeading = 'Gestion des etudiants';
+        $pageTitle = 'Étudiants';
+        $pageHeading = 'Gestion des étudiants';
         $activePage = 'etudiants';
         $baseUrl = $this->baseUrl;
         require __DIR__ . '/../views/etudiants/index.php';
@@ -28,7 +28,7 @@ class EtudiantController
         $data = $this->readPost();
         $this->validate($data, 0);
         $this->etudiantModel->create($data['nom'], $data['prenom'], $data['numero_etudiant'], $data['filiere'], $data['contact']);
-        redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'success', 'Etudiant ajoute avec succes.');
+        redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'success', 'Étudiant ajouté avec succès.');
     }
 
     public function edit($id)
@@ -37,7 +37,7 @@ class EtudiantController
             $data = $this->readPost();
             $this->validate($data, $id);
             $this->etudiantModel->update($id, $data['nom'], $data['prenom'], $data['numero_etudiant'], $data['filiere'], $data['contact']);
-            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'success', 'Etudiant modifie avec succes.');
+            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'success', 'Étudiant modifié avec succès.');
         }
 
         $editEtudiant = $this->etudiantModel->getById($id);
@@ -47,11 +47,11 @@ class EtudiantController
     public function delete($id)
     {
         if ($this->etudiantModel->countEmprunts($id) > 0) {
-            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'error', 'Impossible de supprimer cet etudiant car il est lie a un emprunt.');
+            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'error', 'Impossible de supprimer cet étudiant car il est lié à un emprunt.');
         }
 
         $this->etudiantModel->delete($id);
-        redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'success', 'Etudiant supprime avec succes.');
+        redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'success', 'Étudiant supprimé avec succès.');
     }
 
     private function readPost()
@@ -68,11 +68,15 @@ class EtudiantController
     private function validate($data, $id)
     {
         if ($data['nom'] === '' || $data['prenom'] === '' || $data['numero_etudiant'] === '' || $data['filiere'] === '') {
-            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'error', 'Tous les champs obligatoires doivent etre remplis.');
+            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'error', 'Tous les champs obligatoires doivent être remplis.');
+        }
+
+        if ($data['contact'] === '') {
+            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'error', "Le contact de l'étudiant est obligatoire.");
         }
 
         if ($this->etudiantModel->numeroExists($data['numero_etudiant'], $id)) {
-            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'error', 'Ce numero etudiant existe deja.');
+            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'error', 'Ce numéro étudiant existe déjà.');
         }
     }
 }

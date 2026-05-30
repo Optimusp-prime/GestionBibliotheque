@@ -64,8 +64,10 @@ switch ($page) {
     case 'emprunts':
         if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $empruntController->create();
-        } elseif ($action === 'retour' && $id > 0) {
+        } elseif ($action === 'retour' && $id > 0 && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $empruntController->retour($id);
+        } elseif ($action === 'retour') {
+            redirectWithMessage($baseUrl . '/index.php?page=emprunts', 'error', 'Action non autorisée.');
         } else {
             $empruntController->index();
         }

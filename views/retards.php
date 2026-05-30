@@ -14,21 +14,21 @@
       <table class="custom-table table-wide">
         <thead>
           <tr>
-            <th class="cell-medium">Etudiant</th>
-            <th class="cell-medium">Numero</th>
+            <th class="cell-medium">Étudiant</th>
+            <th class="cell-medium">Numéro</th>
             <th class="cell-long">Livre</th>
-            <th class="cell-medium">Date emprunt</th>
-            <th class="cell-medium">Retour prevu</th>
+            <th class="cell-medium">Date d'emprunt</th>
+            <th class="cell-medium">Retour prévu</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($retards as $retard): ?>
             <tr>
-              <td class="cell-medium" data-label="Etudiant"><?= h($retard['prenom'] . ' ' . $retard['nom']) ?></td>
-              <td class="cell-medium" data-label="Numero"><?= h($retard['numero_etudiant']) ?></td>
+              <td class="cell-medium" data-label="Étudiant"><?= h($retard['prenom'] . ' ' . $retard['nom']) ?></td>
+              <td class="cell-medium" data-label="Numéro"><?= h($retard['numero_etudiant']) ?></td>
               <td class="cell-long" data-label="Livre"><?= h($retard['titre']) ?></td>
-              <td class="cell-medium" data-label="Date emprunt"><?= h($retard['date_emprunt']) ?></td>
-              <td class="cell-medium" data-label="Retour prevu"><?= h($retard['date_retour_prevue']) ?></td>
+              <td class="cell-medium" data-label="Date d'emprunt"><?= h($retard['date_emprunt']) ?></td>
+              <td class="cell-medium" data-label="Retour prévu"><?= h($retard['date_retour_prevue']) ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

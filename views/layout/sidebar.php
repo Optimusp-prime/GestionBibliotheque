@@ -2,8 +2,8 @@
 $items = [
     'dashboard' => ['Tableau de bord', 'bi-grid-1x2', 'dashboard'],
     'livres' => ['Livres', 'bi-book', 'livres'],
-    'categories' => ['Categories', 'bi-tags', 'categories'],
-    'etudiants' => ['Etudiants', 'bi-mortarboard', 'etudiants'],
+    'categories' => ['Catégories', 'bi-tags', 'categories'],
+    'etudiants' => ['Étudiants', 'bi-mortarboard', 'etudiants'],
     'emprunts' => ['Emprunts', 'bi-arrow-left-right', 'emprunts'],
     'retards' => ['Retards', 'bi-exclamation-triangle', 'retards'],
     'statistiques' => ['Statistiques', 'bi-bar-chart', 'statistiques'],

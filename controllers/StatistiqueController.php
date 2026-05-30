@@ -17,7 +17,7 @@ class StatistiqueController
     {
         $retards = $this->statistiqueModel->retards();
         $pageTitle = 'Retards';
-        $pageHeading = 'Etudiants en retard';
+        $pageHeading = 'Étudiants en retard';
         $activePage = 'retards';
         $baseUrl = $this->baseUrl;
         require __DIR__ . '/../views/retards.php';

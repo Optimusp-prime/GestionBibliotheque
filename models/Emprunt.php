@@ -43,14 +43,19 @@ class Emprunt
                 return 'indisponible';
             }
 
+            $stmt = $this->conn->prepare('UPDATE livres SET quantite_disponible = quantite_disponible - 1 WHERE id = ? AND quantite_disponible > 0');
+            $stmt->execute([$livreId]);
+
+            if ($stmt->rowCount() === 0) {
+                $this->conn->rollBack();
+                return 'indisponible';
+            }
+
             $stmt = $this->conn->prepare('
                 INSERT INTO emprunts (livre_id, etudiant_id, date_emprunt, date_retour_prevue, est_retourne)
                 VALUES (?, ?, ?, ?, 0)
             ');
             $stmt->execute([$livreId, $etudiantId, $dateEmprunt, $dateRetourPrevue]);
-
-            $stmt = $this->conn->prepare('UPDATE livres SET quantite_disponible = quantite_disponible - 1 WHERE id = ? AND quantite_disponible > 0');
-            $stmt->execute([$livreId]);
 
             $this->conn->commit();
             return 'ok';

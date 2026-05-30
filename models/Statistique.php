@@ -84,11 +84,11 @@ class Statistique
     public function livresPlusEmpruntes()
     {
         $stmt = $this->conn->prepare("
-            SELECT TOP 10 l.titre, COUNT(e.id) AS total
+            SELECT TOP 10 l.id, l.titre, COUNT(e.id) AS total
             FROM emprunts e
             INNER JOIN livres l ON l.id = e.livre_id
-            GROUP BY l.titre
-            ORDER BY total DESC
+            GROUP BY l.id, l.titre
+            ORDER BY total DESC, l.id DESC
         ");
         $stmt->execute();
         return $stmt->fetchAll();

@@ -4,7 +4,7 @@
   <div class="col-xl-4 col-lg-12">
     <div class="content-card">
       <div class="card-head">
-        <h5><i class="bi bi-tags me-2"></i><?= $editCategorie ? 'Modifier une categorie' : 'Ajouter une categorie' ?></h5>
+        <h5><i class="bi bi-tags me-2"></i><?= $editCategorie ? 'Modifier une catégorie' : 'Ajouter une catégorie' ?></h5>
       </div>
       <div class="card-body-custom">
         <div class="form-section-title">Informations</div>
@@ -27,7 +27,7 @@
   <div class="col-xl-8 col-lg-12">
     <div class="content-card">
       <div class="card-head">
-        <h5><i class="bi bi-list-ul me-2"></i>Liste des categories</h5>
+        <h5><i class="bi bi-list-ul me-2"></i>Liste des catégories</h5>
       </div>
       <div class="card-body-custom p-0">
         <table class="custom-table table-wide">
@@ -48,7 +48,7 @@
                 <td class="table-actions" data-label="Actions">
                   <span class="action-group">
                     <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=categories&action=edit&id=<?= h($categorie['id']) ?>"><i class="bi bi-pencil-square"></i></a>
-                    <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=categories&action=delete&id=<?= h($categorie['id']) ?>" onclick="return confirm('Supprimer cette categorie ?')"><i class="bi bi-trash"></i></a>
+                    <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=categories&action=delete&id=<?= h($categorie['id']) ?>" onclick="return confirm('Supprimer cette catégorie ?')"><i class="bi bi-trash"></i></a>
                   </span>
                 </td>
               </tr>
