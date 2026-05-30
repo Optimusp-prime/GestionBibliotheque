@@ -1,120 +1,86 @@
 <?php
 require_once __DIR__ . '/config/database.php';
-require_once __DIR__ . '/includes/functions.php';
+require_once __DIR__ . '/helpers.php';
+require_once __DIR__ . '/controllers/DashboardController.php';
+require_once __DIR__ . '/controllers/CategorieController.php';
+require_once __DIR__ . '/controllers/LivreController.php';
+require_once __DIR__ . '/controllers/EtudiantController.php';
+require_once __DIR__ . '/controllers/EmpruntController.php';
+require_once __DIR__ . '/controllers/StatistiqueController.php';
 
-$db = new Database();
-$conn = $db->getConnection();
+$baseUrl = '/gbibliotheque';
 
-$totalLivres = countRows($conn, 'SELECT COUNT(*) FROM livres');
-$totalEtudiants = countRows($conn, 'SELECT COUNT(*) FROM etudiants');
-$totalEmprunts = countRows($conn, 'SELECT COUNT(*) FROM emprunts');
-$empruntsEnCours = countRows($conn, 'SELECT COUNT(*) FROM emprunts WHERE est_retourne = 0');
-$retards = countRows($conn, 'SELECT COUNT(*) FROM emprunts WHERE est_retourne = 0 AND date_retour_prevue < ' . currentDateSql());
+$database = new Database();
+$conn = $database->getConnection();
 
-$derniersEmprunts = $conn->query("
-    SELECT TOP 5 e.id, l.titre, et.nom, et.prenom, e.date_emprunt, e.date_retour_prevue, e.est_retourne
-    FROM emprunts e
-    INNER JOIN livres l ON l.id = e.livre_id
-    INNER JOIN etudiants et ON et.id = e.etudiant_id
-    ORDER BY e.id DESC
-")->fetchAll();
+$page = $_GET['page'] ?? 'dashboard';
+$action = $_GET['action'] ?? 'index';
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-$pageTitle = 'Tableau de bord';
-$pageHeading = 'Tableau de bord';
-$activePage = 'dashboard';
-$basePath = '.';
-include __DIR__ . '/includes/header.php';
-?>
+$dashboardController = new DashboardController($conn, $baseUrl);
+$categorieController = new CategorieController($conn, $baseUrl);
+$livreController = new LivreController($conn, $baseUrl);
+$etudiantController = new EtudiantController($conn, $baseUrl);
+$empruntController = new EmpruntController($conn, $baseUrl);
+$statistiqueController = new StatistiqueController($conn, $baseUrl);
 
-<div class="row g-3 mb-4">
-  <div class="col-sm-6 col-xl-3">
-    <div class="stat-card blue">
-      <div class="stat-icon blue"><i class="bi bi-book"></i></div>
-      <div>
-        <div class="stat-label">Total livres</div>
-        <div class="stat-value"><?= h($totalLivres) ?></div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-xl-3">
-    <div class="stat-card gold">
-      <div class="stat-icon gold"><i class="bi bi-mortarboard"></i></div>
-      <div>
-        <div class="stat-label">Total etudiants</div>
-        <div class="stat-value"><?= h($totalEtudiants) ?></div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-xl-3">
-    <div class="stat-card green">
-      <div class="stat-icon green"><i class="bi bi-arrow-left-right"></i></div>
-      <div>
-        <div class="stat-label">Total emprunts</div>
-        <div class="stat-value"><?= h($totalEmprunts) ?></div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-xl-3">
-    <div class="stat-card red">
-      <div class="stat-icon red"><i class="bi bi-exclamation-triangle"></i></div>
-      <div>
-        <div class="stat-label">Retards</div>
-        <div class="stat-value"><?= h($retards) ?></div>
-      </div>
-    </div>
-  </div>
-</div>
+switch ($page) {
+    case 'categories':
+        if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $categorieController->create();
+        } elseif ($action === 'edit' && $id > 0) {
+            $categorieController->edit($id);
+        } elseif ($action === 'delete' && $id > 0) {
+            $categorieController->delete($id);
+        } else {
+            $categorieController->index();
+        }
+        break;
 
-<div class="row g-3 mb-4">
-  <div class="col-sm-6 col-xl-3">
-    <div class="stat-card blue">
-      <div class="stat-icon blue"><i class="bi bi-hourglass-split"></i></div>
-      <div>
-        <div class="stat-label">Emprunts en cours</div>
-        <div class="stat-value"><?= h($empruntsEnCours) ?></div>
-      </div>
-    </div>
-  </div>
-</div>
+    case 'livres':
+        if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $livreController->create();
+        } elseif ($action === 'edit' && $id > 0) {
+            $livreController->edit($id);
+        } elseif ($action === 'delete' && $id > 0) {
+            $livreController->delete($id);
+        } else {
+            $livreController->index();
+        }
+        break;
 
-<div class="content-card">
-  <div class="card-head">
-    <h5><i class="bi bi-clock-history me-2"></i>Derniers emprunts</h5>
-    <a href="pages/emprunts/index.php" class="btn-primary-custom"><i class="bi bi-plus-lg"></i> Nouvel emprunt</a>
-  </div>
-  <div class="card-body-custom p-0">
-    <?php if (count($derniersEmprunts) === 0): ?>
-      <div class="empty-state">
-        <i class="bi bi-inbox"></i>
-        <p>Aucun emprunt enregistre pour le moment.</p>
-      </div>
-    <?php else: ?>
-      <table class="custom-table">
-        <thead>
-          <tr>
-            <th>Livre</th>
-            <th>Etudiant</th>
-            <th>Date emprunt</th>
-            <th>Retour prevu</th>
-            <th>Statut</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($derniersEmprunts as $emprunt): ?>
-            <tr>
-              <td><?= h($emprunt['titre']) ?></td>
-              <td><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
-              <td><?= h($emprunt['date_emprunt']) ?></td>
-              <td><?= h($emprunt['date_retour_prevue']) ?></td>
-              <td>
-                <span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourne' : 'En cours' ?></span>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
-    <?php endif; ?>
-  </div>
-</div>
+    case 'etudiants':
+        if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $etudiantController->create();
+        } elseif ($action === 'edit' && $id > 0) {
+            $etudiantController->edit($id);
+        } elseif ($action === 'delete' && $id > 0) {
+            $etudiantController->delete($id);
+        } else {
+            $etudiantController->index();
+        }
+        break;
 
-<?php include __DIR__ . '/includes/footer.php'; ?>
+    case 'emprunts':
+        if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $empruntController->create();
+        } elseif ($action === 'retour' && $id > 0) {
+            $empruntController->retour($id);
+        } else {
+            $empruntController->index();
+        }
+        break;
+
+    case 'retards':
+        $statistiqueController->retards();
+        break;
+
+    case 'statistiques':
+        $statistiqueController->statistiques();
+        break;
+
+    case 'dashboard':
+    default:
+        $dashboardController->index();
+        break;
+}

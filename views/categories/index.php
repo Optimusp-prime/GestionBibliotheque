@@ -1,0 +1,61 @@
+<?php require __DIR__ . '/../layout/header.php'; ?>
+
+<div class="row">
+  <div class="col-lg-5">
+    <div class="content-card">
+      <div class="card-head">
+        <h5><i class="bi bi-tags me-2"></i><?= $editCategorie ? 'Modifier une categorie' : 'Ajouter une categorie' ?></h5>
+      </div>
+      <div class="card-body-custom">
+        <div class="form-section-title">Informations</div>
+        <form method="POST" action="<?= h($baseUrl) ?>/index.php?page=categories&action=<?= $editCategorie ? 'edit&id=' . h($editCategorie['id']) : 'create' ?>">
+          <div class="mb-3">
+            <label class="form-label">Nom <span class="text-danger">*</span></label>
+            <input type="text" name="nom" class="form-control" value="<?= h($editCategorie['nom'] ?? '') ?>" required>
+          </div>
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn-primary-custom"><i class="bi bi-floppy"></i> Enregistrer</button>
+            <?php if ($editCategorie): ?>
+              <a href="<?= h($baseUrl) ?>/index.php?page=categories" class="btn-secondary-custom"><i class="bi bi-x-lg"></i> Annuler</a>
+            <?php endif; ?>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-7">
+    <div class="content-card">
+      <div class="card-head">
+        <h5><i class="bi bi-list-ul me-2"></i>Liste des categories</h5>
+      </div>
+      <div class="card-body-custom p-0">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nom</th>
+              <th>Livres</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($categories as $categorie): ?>
+              <tr>
+                <td><?= h($categorie['id']) ?></td>
+                <td><?= h($categorie['nom']) ?></td>
+                <td><?= h($categorie['nombre_livres']) ?></td>
+                <td>
+                  <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=categories&action=edit&id=<?= h($categorie['id']) ?>"><i class="bi bi-pencil-square"></i></a>
+                  <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=categories&action=delete&id=<?= h($categorie['id']) ?>" onclick="return confirm('Supprimer cette categorie ?')"><i class="bi bi-trash"></i></a>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php require __DIR__ . '/../layout/footer.php'; ?>

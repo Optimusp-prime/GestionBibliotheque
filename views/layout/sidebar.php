@@ -1,0 +1,19 @@
+<?php
+$items = [
+    'dashboard' => ['Tableau de bord', 'bi-grid-1x2', 'dashboard'],
+    'livres' => ['Livres', 'bi-book', 'livres'],
+    'categories' => ['Categories', 'bi-tags', 'categories'],
+    'etudiants' => ['Etudiants', 'bi-mortarboard', 'etudiants'],
+    'emprunts' => ['Emprunts', 'bi-arrow-left-right', 'emprunts'],
+    'retards' => ['Retards', 'bi-exclamation-triangle', 'retards'],
+    'statistiques' => ['Statistiques', 'bi-bar-chart', 'statistiques'],
+];
+?>
+<div class="sidebar">
+  <div class="sidebar-section-title">Navigation</div>
+  <?php foreach ($items as $key => $item): ?>
+    <a href="<?= h($baseUrl) ?>/index.php?page=<?= h($item[2]) ?>" class="<?= $activePage === $key ? 'active' : '' ?>">
+      <i class="bi <?= h($item[1]) ?>"></i> <?= h($item[0]) ?>
+    </a>
+  <?php endforeach; ?>
+</div>
