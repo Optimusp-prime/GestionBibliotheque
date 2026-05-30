@@ -1,7 +1,7 @@
 <?php require __DIR__ . '/../layout/header.php'; ?>
 
 <div class="row">
-  <div class="col-lg-5">
+  <div class="col-xl-4 col-lg-12">
     <div class="content-card">
       <div class="card-head">
         <h5><i class="bi bi-person-plus me-2"></i><?= $editEtudiant ? 'Modifier un etudiant' : 'Ajouter un etudiant' ?></h5>
@@ -42,7 +42,7 @@
     </div>
   </div>
 
-  <div class="col-lg-7">
+  <div class="col-xl-8 col-lg-12">
     <div class="content-card">
       <div class="card-head">
         <h5><i class="bi bi-people me-2"></i>Liste des etudiants</h5>
@@ -62,12 +62,12 @@
           <tbody>
             <?php foreach ($etudiants as $etudiant): ?>
               <tr>
-                <td class="cell-medium"><?= h($etudiant['nom']) ?></td>
-                <td class="cell-medium"><?= h($etudiant['prenom']) ?></td>
-                <td class="cell-medium"><?= h($etudiant['numero_etudiant']) ?></td>
-                <td class="cell-medium"><span class="badge-filiere"><?= h($etudiant['filiere']) ?></span></td>
-                <td class="cell-long"><?= h($etudiant['contact']) ?></td>
-                <td class="table-actions">
+                <td class="cell-medium" data-label="Nom"><?= h($etudiant['nom']) ?></td>
+                <td class="cell-medium" data-label="Prenom"><?= h($etudiant['prenom']) ?></td>
+                <td class="cell-medium" data-label="Numero"><?= h($etudiant['numero_etudiant']) ?></td>
+                <td class="cell-medium" data-label="Filiere"><span class="badge-filiere"><?= h($etudiant['filiere']) ?></span></td>
+                <td class="cell-long" data-label="Contact"><?= h($etudiant['contact']) ?></td>
+                <td class="table-actions" data-label="Actions">
                   <span class="action-group">
                     <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=etudiants&action=edit&id=<?= h($etudiant['id']) ?>"><i class="bi bi-pencil-square"></i></a>
                     <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=etudiants&action=delete&id=<?= h($etudiant['id']) ?>" onclick="return confirm('Supprimer cet etudiant ?')"><i class="bi bi-trash"></i></a>

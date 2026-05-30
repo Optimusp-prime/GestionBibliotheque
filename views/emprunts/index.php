@@ -1,7 +1,7 @@
 <?php require __DIR__ . '/../layout/header.php'; ?>
 
 <div class="row">
-  <div class="col-lg-5">
+  <div class="col-xl-4 col-lg-12">
     <div class="content-card">
       <div class="card-head">
         <h5><i class="bi bi-plus-lg me-2"></i>Enregistrer un emprunt</h5>
@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <div class="col-lg-7">
+  <div class="col-xl-8 col-lg-12">
     <div class="content-card">
       <div class="card-head">
         <h5><i class="bi bi-arrow-left-right me-2"></i>Liste des emprunts</h5>
@@ -71,12 +71,12 @@
           <tbody>
             <?php foreach ($emprunts as $emprunt): ?>
               <tr>
-                <td class="cell-long"><?= h($emprunt['titre']) ?></td>
-                <td class="cell-medium"><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
-                <td class="cell-medium"><?= h($emprunt['date_emprunt']) ?></td>
-                <td class="cell-medium"><?= h($emprunt['date_retour_prevue']) ?></td>
-                <td class="cell-medium"><span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourne' : 'En cours' ?></span></td>
-                <td class="table-actions">
+                <td class="cell-long" data-label="Livre"><?= h($emprunt['titre']) ?></td>
+                <td class="cell-medium" data-label="Etudiant"><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
+                <td class="cell-medium" data-label="Emprunt"><?= h($emprunt['date_emprunt']) ?></td>
+                <td class="cell-medium" data-label="Retour prevu"><?= h($emprunt['date_retour_prevue']) ?></td>
+                <td class="cell-medium" data-label="Statut"><span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourne' : 'En cours' ?></span></td>
+                <td class="table-actions" data-label="Action">
                   <?php if (!$emprunt['est_retourne']): ?>
                     <span class="action-group">
                       <a class="btn-icon return" href="<?= h($baseUrl) ?>/index.php?page=emprunts&action=retour&id=<?= h($emprunt['id']) ?>" title="Marquer comme retourne"><i class="bi bi-check2-circle"></i></a>

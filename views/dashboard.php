@@ -76,11 +76,11 @@
         <tbody>
           <?php foreach ($derniersEmprunts as $emprunt): ?>
             <tr>
-              <td class="cell-long"><?= h($emprunt['titre']) ?></td>
-              <td class="cell-medium"><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
-              <td class="cell-medium"><?= h($emprunt['date_emprunt']) ?></td>
-              <td class="cell-medium"><?= h($emprunt['date_retour_prevue']) ?></td>
-              <td class="cell-medium"><span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourne' : 'En cours' ?></span></td>
+              <td class="cell-long" data-label="Livre"><?= h($emprunt['titre']) ?></td>
+              <td class="cell-medium" data-label="Etudiant"><?= h($emprunt['prenom'] . ' ' . $emprunt['nom']) ?></td>
+              <td class="cell-medium" data-label="Date emprunt"><?= h($emprunt['date_emprunt']) ?></td>
+              <td class="cell-medium" data-label="Retour prevu"><?= h($emprunt['date_retour_prevue']) ?></td>
+              <td class="cell-medium" data-label="Statut"><span class="badge-filiere"><?= $emprunt['est_retourne'] ? 'Retourne' : 'En cours' ?></span></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

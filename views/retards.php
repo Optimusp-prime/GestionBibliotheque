@@ -24,11 +24,11 @@
         <tbody>
           <?php foreach ($retards as $retard): ?>
             <tr>
-              <td class="cell-medium"><?= h($retard['prenom'] . ' ' . $retard['nom']) ?></td>
-              <td class="cell-medium"><?= h($retard['numero_etudiant']) ?></td>
-              <td class="cell-long"><?= h($retard['titre']) ?></td>
-              <td class="cell-medium"><?= h($retard['date_emprunt']) ?></td>
-              <td class="cell-medium"><?= h($retard['date_retour_prevue']) ?></td>
+              <td class="cell-medium" data-label="Etudiant"><?= h($retard['prenom'] . ' ' . $retard['nom']) ?></td>
+              <td class="cell-medium" data-label="Numero"><?= h($retard['numero_etudiant']) ?></td>
+              <td class="cell-long" data-label="Livre"><?= h($retard['titre']) ?></td>
+              <td class="cell-medium" data-label="Date emprunt"><?= h($retard['date_emprunt']) ?></td>
+              <td class="cell-medium" data-label="Retour prevu"><?= h($retard['date_retour_prevue']) ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>

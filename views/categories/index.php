@@ -1,7 +1,7 @@
 <?php require __DIR__ . '/../layout/header.php'; ?>
 
 <div class="row">
-  <div class="col-lg-5">
+  <div class="col-xl-4 col-lg-12">
     <div class="content-card">
       <div class="card-head">
         <h5><i class="bi bi-tags me-2"></i><?= $editCategorie ? 'Modifier une categorie' : 'Ajouter une categorie' ?></h5>
@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="col-lg-7">
+  <div class="col-xl-8 col-lg-12">
     <div class="content-card">
       <div class="card-head">
         <h5><i class="bi bi-list-ul me-2"></i>Liste des categories</h5>
@@ -42,10 +42,10 @@
           <tbody>
             <?php foreach ($categories as $categorie): ?>
               <tr>
-                <td class="cell-small"><?= h($categorie['id']) ?></td>
-                <td class="cell-long"><?= h($categorie['nom']) ?></td>
-                <td class="cell-small"><?= h($categorie['nombre_livres']) ?></td>
-                <td class="table-actions">
+                <td class="cell-small" data-label="#"><?= h($categorie['id']) ?></td>
+                <td class="cell-long" data-label="Nom"><?= h($categorie['nom']) ?></td>
+                <td class="cell-small" data-label="Livres"><?= h($categorie['nombre_livres']) ?></td>
+                <td class="table-actions" data-label="Actions">
                   <span class="action-group">
                     <a class="btn-icon edit" href="<?= h($baseUrl) ?>/index.php?page=categories&action=edit&id=<?= h($categorie['id']) ?>"><i class="bi bi-pencil-square"></i></a>
                     <a class="btn-icon delete" href="<?= h($baseUrl) ?>/index.php?page=categories&action=delete&id=<?= h($categorie['id']) ?>" onclick="return confirm('Supprimer cette categorie ?')"><i class="bi bi-trash"></i></a>

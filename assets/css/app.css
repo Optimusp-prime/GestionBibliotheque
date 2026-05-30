@@ -233,10 +233,10 @@ body {
   min-width: 100%;
   border-collapse: collapse;
   font-size: 0.875rem;
-  table-layout: auto;
+  table-layout: fixed;
 }
 .custom-table.table-wide {
-  min-width: 760px;
+  min-width: 100%;
 }
 .custom-table thead th {
   background: var(--primary);
@@ -260,27 +260,25 @@ body {
   padding: 0.75rem 1rem;
   color: #444;
   vertical-align: middle;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
   line-height: 1.45;
 }
 .content-card > .card-body-custom.p-0 {
-  overflow-x: auto;
+  overflow-x: visible;
 }
 .custom-table .cell-long {
-  min-width: 180px;
-  max-width: 320px;
+  width: 28%;
 }
 .custom-table .cell-medium {
-  min-width: 130px;
+  width: 17%;
 }
 .custom-table .cell-small {
-  width: 80px;
-  min-width: 80px;
+  width: 74px;
   text-align: center;
 }
 .custom-table .table-actions {
-  width: 104px;
-  min-width: 104px;
+  width: 96px;
   text-align: center;
   white-space: nowrap;
 }
@@ -478,7 +476,7 @@ body {
     font-size: 0.82rem;
   }
   .custom-table.table-wide {
-    min-width: 680px;
+    min-width: 100%;
   }
   .card-body-custom .d-flex {
     flex-wrap: wrap;
@@ -515,9 +513,69 @@ body {
     min-width: 100%;
   }
   .custom-table.table-wide {
-    min-width: 620px;
+    min-width: 100%;
   }
   .badge-filiere {
     max-width: 190px;
+  }
+}
+
+@media (max-width: 700px) {
+  .custom-table.table-wide {
+    display: block;
+    width: 100%;
+  }
+  .custom-table.table-wide thead {
+    display: none;
+  }
+  .custom-table.table-wide tbody {
+    display: block;
+    padding: 0.75rem;
+  }
+  .custom-table.table-wide tbody tr {
+    display: block;
+    background: white;
+    border: 1px solid #eef0f5;
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+  .custom-table.table-wide tbody tr:hover {
+    background: white;
+  }
+  .custom-table.table-wide tbody td {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    padding: 0.65rem 0.85rem;
+    border-bottom: 1px solid #f0f2f7;
+    text-align: right;
+  }
+  .custom-table.table-wide tbody td:last-child {
+    border-bottom: none;
+  }
+  .custom-table.table-wide tbody td::before {
+    content: attr(data-label);
+    flex: 0 0 42%;
+    color: #777;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .custom-table.table-wide tbody td.table-actions {
+    justify-content: space-between;
+    white-space: normal;
+  }
+  .custom-table.table-wide .action-group {
+    justify-content: flex-end;
+    min-width: 0;
+  }
+  .custom-table.table-wide .badge-filiere {
+    max-width: 52vw;
   }
 }

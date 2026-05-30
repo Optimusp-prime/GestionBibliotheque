@@ -19,7 +19,7 @@
         <h5><i class="bi bi-tags me-2"></i>Livres par categorie</h5>
       </div>
       <div class="card-body-custom p-0">
-        <table class="custom-table">
+        <table class="custom-table table-wide">
           <thead>
             <tr>
               <th class="cell-long">Categorie</th>
@@ -29,8 +29,8 @@
           <tbody>
             <?php foreach ($livresParCategorie as $row): ?>
               <tr>
-                <td class="cell-long"><?= h($row['nom']) ?></td>
-                <td class="cell-medium"><?= h($row['total']) ?></td>
+                <td class="cell-long" data-label="Categorie"><?= h($row['nom']) ?></td>
+                <td class="cell-medium" data-label="Nombre de livres"><?= h($row['total']) ?></td>
               </tr>
             <?php endforeach; ?>
           </tbody>
@@ -45,7 +45,7 @@
         <h5><i class="bi bi-book me-2"></i>Livres les plus empruntes</h5>
       </div>
       <div class="card-body-custom p-0">
-        <table class="custom-table">
+        <table class="custom-table table-wide">
           <thead>
             <tr>
               <th class="cell-long">Livre</th>
@@ -55,8 +55,8 @@
           <tbody>
             <?php foreach ($livresPlusEmpruntes as $row): ?>
               <tr>
-                <td class="cell-long"><?= h($row['titre']) ?></td>
-                <td class="cell-medium"><?= h($row['total']) ?></td>
+                <td class="cell-long" data-label="Livre"><?= h($row['titre']) ?></td>
+                <td class="cell-medium" data-label="Emprunts"><?= h($row['total']) ?></td>
               </tr>
             <?php endforeach; ?>
           </tbody>
@@ -71,7 +71,7 @@
     <h5><i class="bi bi-mortarboard me-2"></i>Etudiants qui empruntent le plus</h5>
   </div>
   <div class="card-body-custom p-0">
-    <table class="custom-table">
+    <table class="custom-table table-wide">
       <thead>
         <tr>
           <th class="cell-medium">Etudiant</th>
@@ -82,9 +82,9 @@
       <tbody>
         <?php foreach ($etudiantsPlusActifs as $row): ?>
           <tr>
-            <td class="cell-medium"><?= h($row['prenom'] . ' ' . $row['nom']) ?></td>
-            <td class="cell-medium"><?= h($row['numero_etudiant']) ?></td>
-            <td class="cell-medium"><?= h($row['total']) ?></td>
+            <td class="cell-medium" data-label="Etudiant"><?= h($row['prenom'] . ' ' . $row['nom']) ?></td>
+            <td class="cell-medium" data-label="Numero"><?= h($row['numero_etudiant']) ?></td>
+            <td class="cell-medium" data-label="Emprunts"><?= h($row['total']) ?></td>
           </tr>
         <?php endforeach; ?>
       </tbody>
