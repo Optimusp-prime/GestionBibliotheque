@@ -11,18 +11,18 @@
         <form method="POST" action="<?= h($baseUrl) ?>/index.php?page=livres&action=<?= $editLivre ? 'edit&id=' . h($editLivre['id']) : 'create' ?>">
           <div class="mb-3">
             <label class="form-label">Titre <span class="text-danger">*</span></label>
-            <input type="text" name="titre" class="form-control" value="<?= h($editLivre['titre'] ?? '') ?>" required>
+            <input type="text" name="titre" class="form-control" value="<?= h(old('titre', $editLivre['titre'] ?? '')) ?>" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Auteur <span class="text-danger">*</span></label>
-            <input type="text" name="auteur" class="form-control" value="<?= h($editLivre['auteur'] ?? '') ?>" required>
+            <input type="text" name="auteur" class="form-control" value="<?= h(old('auteur', $editLivre['auteur'] ?? '')) ?>" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Catégorie <span class="text-danger">*</span></label>
             <select name="categorie_id" class="form-select" required>
               <option value="">-- Choisir une catégorie --</option>
               <?php foreach ($categories as $categorie): ?>
-                <option value="<?= h($categorie['id']) ?>" <?= (int)($editLivre['categorie_id'] ?? 0) === (int)$categorie['id'] ? 'selected' : '' ?>>
+                <option value="<?= h($categorie['id']) ?>" <?= (int) old('categorie_id', $editLivre['categorie_id'] ?? 0) === (int)$categorie['id'] ? 'selected' : '' ?>>
                   <?= h($categorie['nom']) ?>
                 </option>
               <?php endforeach; ?>
@@ -30,12 +30,12 @@
           </div>
           <div class="row g-3 mb-3">
             <div class="col-md-6">
-              <label class="form-label">Année <span class="text-danger">*</span></label>
-              <input type="number" name="annee" class="form-control" value="<?= h($editLivre['annee'] ?? '') ?>" required>
+              <label class="form-label">Année</label>
+              <input type="number" name="annee" class="form-control" value="<?= h(old('annee', $editLivre['annee'] ?? '')) ?>">
             </div>
             <div class="col-md-6">
               <label class="form-label">Quantité disponible <span class="text-danger">*</span></label>
-              <input type="number" name="quantite_disponible" min="0" class="form-control" value="<?= h($editLivre['quantite_disponible'] ?? '0') ?>" required>
+              <input type="number" name="quantite_disponible" min="0" class="form-control" value="<?= h(old('quantite_disponible', $editLivre['quantite_disponible'] ?? '0')) ?>" required>
             </div>
           </div>
           <div class="d-flex gap-2">
@@ -62,6 +62,12 @@
         </form>
       </div>
       <div class="card-body-custom p-0">
+        <?php if (count($livres) === 0): ?>
+          <div class="empty-state">
+            <i class="bi bi-book"></i>
+            <p><?= $search !== '' ? 'Aucun livre ne correspond à cette recherche.' : 'Aucun livre enregistré pour le moment.' ?></p>
+          </div>
+        <?php else: ?>
         <table class="custom-table table-wide">
           <thead>
             <tr>
@@ -91,6 +97,7 @@
             <?php endforeach; ?>
           </tbody>
         </table>
+        <?php endif; ?>
       </div>
     </div>
   </div>

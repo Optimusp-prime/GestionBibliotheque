@@ -98,6 +98,12 @@ $topEtudiantValues = array_map(function ($row) {
         <h5><i class="bi bi-tags me-2"></i>Livres par catégorie</h5>
       </div>
       <div class="card-body-custom p-0">
+        <?php if (count($livresParCategorie) === 0): ?>
+          <div class="empty-state">
+            <i class="bi bi-tags"></i>
+            <p>Aucune donnée statistique disponible pour le moment.</p>
+          </div>
+        <?php else: ?>
         <table class="custom-table table-wide">
           <thead>
             <tr>
@@ -114,6 +120,7 @@ $topEtudiantValues = array_map(function ($row) {
             <?php endforeach; ?>
           </tbody>
         </table>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -124,6 +131,12 @@ $topEtudiantValues = array_map(function ($row) {
         <h5><i class="bi bi-book me-2"></i>Livres les plus empruntés</h5>
       </div>
       <div class="card-body-custom p-0">
+        <?php if (count($livresPlusEmpruntes) === 0): ?>
+          <div class="empty-state">
+            <i class="bi bi-book"></i>
+            <p>Aucun emprunt de livre pour le moment.</p>
+          </div>
+        <?php else: ?>
         <table class="custom-table table-wide">
           <thead>
             <tr>
@@ -140,6 +153,7 @@ $topEtudiantValues = array_map(function ($row) {
             <?php endforeach; ?>
           </tbody>
         </table>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -150,6 +164,12 @@ $topEtudiantValues = array_map(function ($row) {
     <h5><i class="bi bi-mortarboard me-2"></i>Étudiants qui empruntent le plus</h5>
   </div>
   <div class="card-body-custom p-0">
+    <?php if (count($etudiantsPlusActifs) === 0): ?>
+      <div class="empty-state">
+        <i class="bi bi-mortarboard"></i>
+        <p>Aucun emprunt étudiant pour le moment.</p>
+      </div>
+    <?php else: ?>
     <table class="custom-table table-wide">
       <thead>
         <tr>
@@ -168,6 +188,7 @@ $topEtudiantValues = array_map(function ($row) {
         <?php endforeach; ?>
       </tbody>
     </table>
+    <?php endif; ?>
   </div>
 </div>
 

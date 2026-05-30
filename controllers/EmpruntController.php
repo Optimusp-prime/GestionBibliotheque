@@ -38,30 +38,36 @@ class EmpruntController
         $etudiantId = (int) ($_POST['etudiant_id'] ?? 0);
         $dateEmprunt = $_POST['date_emprunt'] ?? '';
         $dateRetourPrevue = $_POST['date_retour_prevue'] ?? '';
+        $oldInput = [
+            'livre_id' => $livreId,
+            'etudiant_id' => $etudiantId,
+            'date_emprunt' => $dateEmprunt,
+            'date_retour_prevue' => $dateRetourPrevue,
+        ];
 
         if ($livreId <= 0 || $etudiantId <= 0 || $dateEmprunt === '' || $dateRetourPrevue === '') {
-            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', 'Tous les champs sont obligatoires.');
+            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', 'Veuillez remplir tous les champs obligatoires.', $oldInput);
         }
 
         $dateEmpruntObj = $this->createDate($dateEmprunt);
         $dateRetourPrevueObj = $this->createDate($dateRetourPrevue);
 
         if (!$dateEmpruntObj || !$dateRetourPrevueObj) {
-            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', 'Les dates saisies ne sont pas valides.');
+            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', 'Les dates saisies ne sont pas valides.', $oldInput);
         }
 
         if ($dateRetourPrevueObj < $dateEmpruntObj) {
-            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', "La date de retour prévue doit être supérieure ou égale à la date d'emprunt.");
+            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', "La date de retour prévue doit être supérieure ou égale à la date d'emprunt.", $oldInput);
         }
 
         $result = $this->empruntModel->create($livreId, $etudiantId, $dateEmprunt, $dateRetourPrevue);
 
         if ($result === 'indisponible') {
-            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', "Ce livre n'est pas disponible pour un emprunt.");
+            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', "Ce livre n'est pas disponible pour le moment.", $oldInput);
         }
 
         if ($result !== 'ok') {
-            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', "Erreur pendant l'enregistrement de l'emprunt.");
+            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', "Erreur pendant l'enregistrement de l'emprunt.", $oldInput);
         }
 
         redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'success', 'Emprunt enregistré avec succès.');
@@ -76,14 +82,14 @@ class EmpruntController
         }
 
         if ($result === 'deja_retourne') {
-            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'warning', 'Cet emprunt est déjà retourné.');
+            redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'warning', 'Cet emprunt a déjà été retourné.');
         }
 
         if ($result !== 'ok') {
             redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'error', 'Erreur pendant le retour du livre.');
         }
 
-        redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'success', 'Livre marqué comme retourné.');
+        redirectWithMessage($this->baseUrl . '/index.php?page=emprunts', 'success', 'Livre marqué comme retourné avec succès.');
     }
 
     private function createDate($date)

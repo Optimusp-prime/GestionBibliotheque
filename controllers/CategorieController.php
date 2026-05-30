@@ -28,7 +28,7 @@ class CategorieController
         $nom = trim($_POST['nom'] ?? '');
 
         if ($nom === '') {
-            redirectWithMessage($this->baseUrl . '/index.php?page=categories', 'error', 'Le nom de la catégorie est obligatoire.');
+            redirectWithMessage($this->baseUrl . '/index.php?page=categories', 'error', 'Le nom de la catégorie est obligatoire.', ['nom' => $_POST['nom'] ?? '']);
         }
 
         $this->categorieModel->create($nom);
@@ -41,7 +41,7 @@ class CategorieController
             $nom = trim($_POST['nom'] ?? '');
 
             if ($nom === '') {
-                redirectWithMessage($this->baseUrl . '/index.php?page=categories&action=edit&id=' . (int) $id, 'error', 'Le nom de la catégorie est obligatoire.');
+                redirectWithMessage($this->baseUrl . '/index.php?page=categories&action=edit&id=' . (int) $id, 'error', 'Le nom de la catégorie est obligatoire.', ['nom' => $_POST['nom'] ?? '']);
             }
 
             $this->categorieModel->update($id, $nom);

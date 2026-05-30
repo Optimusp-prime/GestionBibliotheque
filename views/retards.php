@@ -8,7 +8,7 @@
     <?php if (count($retards) === 0): ?>
       <div class="empty-state">
         <i class="bi bi-check2-circle"></i>
-        <p>Aucun retard pour le moment.</p>
+        <p>Aucun retard actuellement.</p>
       </div>
     <?php else: ?>
       <table class="custom-table table-wide">

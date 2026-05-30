@@ -12,24 +12,24 @@
           <div class="row g-3 mb-3">
             <div class="col-md-6">
               <label class="form-label">Nom <span class="text-danger">*</span></label>
-              <input type="text" name="nom" class="form-control" value="<?= h($editEtudiant['nom'] ?? '') ?>" required>
+              <input type="text" name="nom" class="form-control" value="<?= h(old('nom', $editEtudiant['nom'] ?? '')) ?>" required>
             </div>
             <div class="col-md-6">
               <label class="form-label">Prénom <span class="text-danger">*</span></label>
-              <input type="text" name="prenom" class="form-control" value="<?= h($editEtudiant['prenom'] ?? '') ?>" required>
+              <input type="text" name="prenom" class="form-control" value="<?= h(old('prenom', $editEtudiant['prenom'] ?? '')) ?>" required>
             </div>
           </div>
           <div class="mb-3">
             <label class="form-label">Numéro étudiant <span class="text-danger">*</span></label>
-            <input type="text" name="numero_etudiant" class="form-control" value="<?= h($editEtudiant['numero_etudiant'] ?? '') ?>" required>
+            <input type="text" name="numero_etudiant" class="form-control" value="<?= h(old('numero_etudiant', $editEtudiant['numero_etudiant'] ?? '')) ?>" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Filière <span class="text-danger">*</span></label>
-            <input type="text" name="filiere" class="form-control" value="<?= h($editEtudiant['filiere'] ?? '') ?>" required>
+            <input type="text" name="filiere" class="form-control" value="<?= h(old('filiere', $editEtudiant['filiere'] ?? '')) ?>" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Contact <span class="text-danger">*</span></label>
-            <input type="text" name="contact" class="form-control" value="<?= h($editEtudiant['contact'] ?? '') ?>" required>
+            <input type="text" name="contact" class="form-control" value="<?= h(old('contact', $editEtudiant['contact'] ?? '')) ?>" required>
           </div>
           <div class="d-flex gap-2">
             <button type="submit" class="btn-primary-custom"><i class="bi bi-floppy"></i> Enregistrer</button>
@@ -48,6 +48,12 @@
         <h5><i class="bi bi-people me-2"></i>Liste des étudiants</h5>
       </div>
       <div class="card-body-custom p-0">
+        <?php if (count($etudiants) === 0): ?>
+          <div class="empty-state">
+            <i class="bi bi-mortarboard"></i>
+            <p>Aucun étudiant enregistré pour le moment.</p>
+          </div>
+        <?php else: ?>
         <table class="custom-table table-wide">
           <thead>
             <tr>
@@ -77,6 +83,7 @@
             <?php endforeach; ?>
           </tbody>
         </table>
+        <?php endif; ?>
       </div>
     </div>
   </div>

@@ -1,7 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
+  initToasts();
   initDeleteModal();
   initCharts();
 });
+
+function initToasts() {
+  if (typeof bootstrap === 'undefined') {
+    return;
+  }
+
+  document.querySelectorAll('.app-toast').forEach(function (toastElement) {
+    var toast = new bootstrap.Toast(toastElement);
+    toast.show();
+  });
+}
 
 function initDeleteModal() {
   var modalElement = document.getElementById('deleteConfirmModal');

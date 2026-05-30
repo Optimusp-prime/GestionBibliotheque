@@ -11,7 +11,7 @@
         <form method="POST" action="<?= h($baseUrl) ?>/index.php?page=categories&action=<?= $editCategorie ? 'edit&id=' . h($editCategorie['id']) : 'create' ?>">
           <div class="mb-3">
             <label class="form-label">Nom <span class="text-danger">*</span></label>
-            <input type="text" name="nom" class="form-control" value="<?= h($editCategorie['nom'] ?? '') ?>" required>
+            <input type="text" name="nom" class="form-control" value="<?= h(old('nom', $editCategorie['nom'] ?? '')) ?>" required>
           </div>
           <div class="d-flex gap-2">
             <button type="submit" class="btn-primary-custom"><i class="bi bi-floppy"></i> Enregistrer</button>
@@ -30,6 +30,12 @@
         <h5><i class="bi bi-list-ul me-2"></i>Liste des catégories</h5>
       </div>
       <div class="card-body-custom p-0">
+        <?php if (count($categories) === 0): ?>
+          <div class="empty-state">
+            <i class="bi bi-tags"></i>
+            <p>Aucune catégorie disponible.</p>
+          </div>
+        <?php else: ?>
         <table class="custom-table table-wide">
           <thead>
             <tr>
@@ -55,6 +61,7 @@
             <?php endforeach; ?>
           </tbody>
         </table>
+        <?php endif; ?>
       </div>
     </div>
   </div>

@@ -31,8 +31,8 @@ class LivreController
     public function create()
     {
         $data = $this->readPost();
-        $this->validate($data);
-        $this->livreModel->create($data['titre'], $data['auteur'], $data['categorie_id'], $data['annee'], $data['quantite_disponible']);
+        $this->validate($data, $this->baseUrl . '/index.php?page=livres');
+        $this->livreModel->create($data['titre'], $data['auteur'], $data['categorie_id'], $data['annee'] === '' ? null : (int) $data['annee'], (int) $data['quantite_disponible']);
         redirectWithMessage($this->baseUrl . '/index.php?page=livres', 'success', 'Livre ajouté avec succès.');
     }
 
@@ -40,8 +40,8 @@ class LivreController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $this->readPost();
-            $this->validate($data);
-            $this->livreModel->update($id, $data['titre'], $data['auteur'], $data['categorie_id'], $data['annee'], $data['quantite_disponible']);
+            $this->validate($data, $this->baseUrl . '/index.php?page=livres&action=edit&id=' . (int) $id);
+            $this->livreModel->update($id, $data['titre'], $data['auteur'], $data['categorie_id'], $data['annee'] === '' ? null : (int) $data['annee'], (int) $data['quantite_disponible']);
             redirectWithMessage($this->baseUrl . '/index.php?page=livres', 'success', 'Livre modifié avec succès.');
         }
 
@@ -66,18 +66,26 @@ class LivreController
             'auteur' => trim($_POST['auteur'] ?? ''),
             'categorie_id' => (int) ($_POST['categorie_id'] ?? 0),
             'annee' => trim($_POST['annee'] ?? ''),
-            'quantite_disponible' => (int) ($_POST['quantite_disponible'] ?? 0),
+            'quantite_disponible' => trim($_POST['quantite_disponible'] ?? ''),
         ];
     }
 
-    private function validate($data)
+    private function validate($data, $redirectUrl)
     {
-        if ($data['titre'] === '' || $data['auteur'] === '' || $data['categorie_id'] <= 0 || $data['annee'] === '') {
-            redirectWithMessage($this->baseUrl . '/index.php?page=livres', 'error', 'Tous les champs obligatoires doivent être remplis.');
+        if ($data['titre'] === '' || $data['auteur'] === '' || $data['categorie_id'] <= 0 || $data['quantite_disponible'] === '') {
+            redirectWithMessage($redirectUrl, 'error', 'Veuillez remplir tous les champs obligatoires.', $data);
         }
 
-        if ($data['quantite_disponible'] < 0) {
-            redirectWithMessage($this->baseUrl . '/index.php?page=livres', 'error', 'La quantité disponible ne peut pas être négative.');
+        if ($data['annee'] !== '') {
+            $anneeMax = (int) date('Y') + 1;
+
+            if (!ctype_digit($data['annee']) || (int) $data['annee'] < 0 || (int) $data['annee'] > $anneeMax) {
+                redirectWithMessage($redirectUrl, 'error', 'L’année du livre n’est pas valide.', $data);
+            }
+        }
+
+        if (!ctype_digit($data['quantite_disponible']) || (int) $data['quantite_disponible'] < 0) {
+            redirectWithMessage($redirectUrl, 'error', 'La quantité disponible doit être un nombre supérieur ou égal à 0.', $data);
         }
     }
 }

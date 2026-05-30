@@ -26,7 +26,7 @@ class EtudiantController
     public function create()
     {
         $data = $this->readPost();
-        $this->validate($data, 0);
+        $this->validate($data, 0, $this->baseUrl . '/index.php?page=etudiants');
         $this->etudiantModel->create($data['nom'], $data['prenom'], $data['numero_etudiant'], $data['filiere'], $data['contact']);
         redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'success', 'Étudiant ajouté avec succès.');
     }
@@ -35,7 +35,7 @@ class EtudiantController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $this->readPost();
-            $this->validate($data, $id);
+            $this->validate($data, $id, $this->baseUrl . '/index.php?page=etudiants&action=edit&id=' . (int) $id);
             $this->etudiantModel->update($id, $data['nom'], $data['prenom'], $data['numero_etudiant'], $data['filiere'], $data['contact']);
             redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'success', 'Étudiant modifié avec succès.');
         }
@@ -65,18 +65,18 @@ class EtudiantController
         ];
     }
 
-    private function validate($data, $id)
+    private function validate($data, $id, $redirectUrl)
     {
         if ($data['nom'] === '' || $data['prenom'] === '' || $data['numero_etudiant'] === '' || $data['filiere'] === '') {
-            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'error', 'Tous les champs obligatoires doivent être remplis.');
+            redirectWithMessage($redirectUrl, 'error', 'Veuillez remplir tous les champs obligatoires.', $data);
         }
 
         if ($data['contact'] === '') {
-            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'error', "Le contact de l'étudiant est obligatoire.");
+            redirectWithMessage($redirectUrl, 'error', "Le contact de l'étudiant est obligatoire.", $data);
         }
 
         if ($this->etudiantModel->numeroExists($data['numero_etudiant'], $id)) {
-            redirectWithMessage($this->baseUrl . '/index.php?page=etudiants', 'error', 'Ce numéro étudiant existe déjà.');
+            redirectWithMessage($redirectUrl, 'error', 'Ce numéro étudiant existe déjà.', $data);
         }
     }
 }

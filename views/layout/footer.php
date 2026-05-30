@@ -25,5 +25,6 @@
     <script src="<?= h($baseUrl) ?>/src/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= h($baseUrl) ?>/assets/vendor/chartjs/chart.umd.min.js"></script>
     <script src="<?= h($baseUrl) ?>/assets/js/app.js"></script>
+    <?php clearFlashData(); ?>
   </body>
 </html>

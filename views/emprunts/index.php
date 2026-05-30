@@ -14,7 +14,7 @@
             <select name="livre_id" class="form-select" required>
               <option value="">-- Choisir un livre --</option>
               <?php foreach ($livres as $livre): ?>
-                <option value="<?= h($livre['id']) ?>">
+                <option value="<?= h($livre['id']) ?>" <?= (int) old('livre_id', 0) === (int) $livre['id'] ? 'selected' : '' ?>>
                   <?= h($livre['titre']) ?> (disponible: <?= h($livre['quantite_disponible']) ?>)
                 </option>
               <?php endforeach; ?>
@@ -25,7 +25,7 @@
             <select name="etudiant_id" class="form-select" required>
               <option value="">-- Choisir un étudiant --</option>
               <?php foreach ($etudiants as $etudiant): ?>
-                <option value="<?= h($etudiant['id']) ?>">
+                <option value="<?= h($etudiant['id']) ?>" <?= (int) old('etudiant_id', 0) === (int) $etudiant['id'] ? 'selected' : '' ?>>
                   <?= h($etudiant['prenom'] . ' ' . $etudiant['nom'] . ' - ' . $etudiant['numero_etudiant']) ?>
                 </option>
               <?php endforeach; ?>
@@ -34,11 +34,11 @@
           <div class="row g-3 mb-3">
             <div class="col-md-6">
               <label class="form-label">Date d'emprunt <span class="text-danger">*</span></label>
-              <input type="date" name="date_emprunt" class="form-control" value="<?= h(date('Y-m-d')) ?>" required>
+              <input type="date" name="date_emprunt" class="form-control" value="<?= h(old('date_emprunt', date('Y-m-d'))) ?>" required>
             </div>
             <div class="col-md-6">
               <label class="form-label">Retour prévu <span class="text-danger">*</span></label>
-              <input type="date" name="date_retour_prevue" class="form-control" required>
+              <input type="date" name="date_retour_prevue" class="form-control" value="<?= h(old('date_retour_prevue')) ?>" required>
             </div>
           </div>
           <button type="submit" class="btn-primary-custom"><i class="bi bi-floppy"></i> Enregistrer</button>
@@ -57,6 +57,12 @@
         </div>
       </div>
       <div class="card-body-custom p-0">
+        <?php if (count($emprunts) === 0): ?>
+          <div class="empty-state">
+            <i class="bi bi-arrow-left-right"></i>
+            <p><?= $filtre === 'en_cours' ? 'Aucun emprunt en cours pour le moment.' : 'Aucun emprunt enregistré pour le moment.' ?></p>
+          </div>
+        <?php else: ?>
         <table class="custom-table table-wide">
           <thead>
             <tr>
@@ -91,6 +97,7 @@
             <?php endforeach; ?>
           </tbody>
         </table>
+        <?php endif; ?>
       </div>
     </div>
   </div>
