@@ -21,7 +21,7 @@ $baseUrl = $baseUrl ?? '/gbibliotheque';
       </button>
       <a href="<?= h($baseUrl) ?>/index.php" class="brand">Gestion <span>Bibliothèque</span></a>
       <div class="topbar-right">
-        <span class="user-name">Bibliothèque universitaire</span>
+        <span class="user-name">Admin</span>
         <div class="avatar">BU</div>
       </div>
     </div>
