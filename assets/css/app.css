@@ -308,6 +308,52 @@ body {
   gap: 0.35rem;
   min-width: 72px;
 }
+.etudiants-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.etudiants-table {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 720px;
+}
+.etudiants-table .col-nom,
+.etudiants-table .col-prenom {
+  width: 15%;
+}
+.etudiants-table .col-numero {
+  width: 17%;
+}
+.etudiants-table .col-filiere {
+  width: 22%;
+}
+.etudiants-table .col-contact {
+  width: 19%;
+}
+.etudiants-table .col-actions {
+  width: 96px;
+}
+.etudiants-table th,
+.etudiants-table td {
+  overflow: hidden;
+}
+.etudiants-table th:not(.table-actions),
+.etudiants-table td:not(.table-actions) {
+  text-align: left;
+}
+.etudiants-table .table-actions {
+  text-align: right;
+}
+.etudiants-table .badge-filiere {
+  display: inline-block;
+  max-width: 100%;
+  min-width: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.etudiants-table .action-group {
+  min-width: 0;
+}
 
 .form-section-title {
   font-size: 0.75rem;
@@ -670,5 +716,13 @@ body {
   }
   .custom-table.table-wide .badge-filiere {
     max-width: 52vw;
+  }
+  .etudiants-table {
+    min-width: 100%;
+    table-layout: auto;
+  }
+  .etudiants-table th,
+  .etudiants-table td {
+    overflow: visible;
   }
 }
