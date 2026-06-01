@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/config/database.php';
 require_once __DIR__ . '/helpers.php';
+require_once __DIR__ . '/models/Statistique.php';
 require_once __DIR__ . '/controllers/DashboardController.php';
 require_once __DIR__ . '/controllers/CategorieController.php';
 require_once __DIR__ . '/controllers/LivreController.php';
@@ -12,6 +13,8 @@ $baseUrl = '/gbibliotheque';
 
 $database = new Database();
 $conn = $database->getConnection();
+$sidebarCounts = (new Statistique($conn))->compteursSidebar();
+$GLOBALS['sidebarCounts'] = $sidebarCounts;
 
 $page = $_GET['page'] ?? 'dashboard';
 $action = $_GET['action'] ?? 'index';

@@ -21,6 +21,11 @@ class Statistique
         return $this->count('SELECT COUNT(*) FROM livres');
     }
 
+    public function totalCategories()
+    {
+        return $this->count('SELECT COUNT(*) FROM categories');
+    }
+
     public function totalEtudiants()
     {
         return $this->count('SELECT COUNT(*) FROM etudiants');
@@ -44,6 +49,17 @@ class Statistique
     public function nombreRetards()
     {
         return $this->count('SELECT COUNT(*) FROM emprunts WHERE est_retourne = 0 AND date_retour_prevue < ' . currentDateSql());
+    }
+
+    public function compteursSidebar()
+    {
+        return [
+            'livres' => $this->totalLivres(),
+            'categories' => $this->totalCategories(),
+            'etudiants' => $this->totalEtudiants(),
+            'emprunts' => $this->totalEmprunts(),
+            'retards' => $this->nombreRetards(),
+        ];
     }
 
     public function derniersEmprunts()
